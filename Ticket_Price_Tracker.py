@@ -143,6 +143,67 @@ def fetch_ticket_price():
 
             writer.writerow(dict(zip(ticket_data.keys(), row)))  # write each row as a dictionary
 
+# Sample list of events
+events = [
+    {"name": "Lil Baby Concert", "type": "concert", "activity": "music", "price": 120},
+    {"name": "NFL Baltimore Ravens vs. Kansas City Chiefs Football Game", "type": "sports", "activity": "outdoor", "price": 75},
+    {"name": "NBA Washington Wizards vs. Denver Nuggets Basketball Game", "type": "sports", "activity": "indoor", "price": 85},
+    {"name": "Jazz Festival", "type": "concert", "activity": "music", "price": 60},
+    {"name": "Katt Williams Comedy Show", "type": "entertainment", "activity": "indoor", "price": 90},
+    {"name": "DC United Soccer Game", "type": "sports", "activity": "outdoor", "price": 70}
+]
+
+# Define the filtering function
+def filter_events_by_activity(events, activity):
+    # Filter events by the specified activity
+    filtered_events = [event for event in events if event["activity"] == activity]
+    
+    # Sort filtered events by type
+    sorted_events = sorted(filtered_events, key=lambda event: event["type"])
+    
+    return sorted_events
+
+# Example usage
+desired_activity = "music"
+filtered_events = filter_events_by_activity(events, desired_activity)
+
+# Output results
+for event in filtered_events:
+    print(f"{event['name']} ({event['type']}) - ${event['price']}")
+
+# Sample list of tickets
+tickets = [
+    {"name": "Lil Baby Concert", "type": "concert", "activity": "music", "price": 120},
+    {"name": "NFL Baltimore Ravens vs. Kansas City Chiefs Football Game", "type": "sports", "activity": "outdoor", "price": 75},
+    {"name": "NBA Washington Wizards vs. Denver Nuggets Basketball Game", "type": "sports", "activity": "indoor", "price": 85},
+    {"name": "Jazz Festival", "type": "concert", "activity": "music", "price": 60},
+    {"name": "Katt Williams Comedy Show", "type": "entertainment", "activity": "indoor", "price": 90},
+    {"name": "DC United Soccer Game", "type": "sports", "activity": "outdoor", "price": 70}
+]
+
+# Define the sorting function
+def sort_tickets_by_price(tickets, order="asc"):
+    # Determine if sorting is in ascending or descending order
+    reverse = order == "desc"
+    
+    # Sort the tickets by price
+    sorted_tickets = sorted(tickets, key=lambda ticket: ticket["price"], reverse=reverse)
+    
+    return sorted_tickets
+
+# Example usage
+sorted_tickets_asc = sort_tickets_by_price(tickets, order="asc")
+sorted_tickets_desc = sort_tickets_by_price(tickets, order="desc")
+
+# Output results
+print("Tickets sorted by price in ascending order:")
+for ticket in sorted_tickets_asc:
+    print(f"{ticket['name']} ({ticket['type']}) - ${ticket['price']}")
+
+print("\nTickets sorted by price in descending order:")
+for ticket in sorted_tickets_desc:
+    print(f"{ticket['name']} ({ticket['type']}) - ${ticket['price']}")
+
 def get_user_selection():
     """
     Allows users to choose an event from a list and returns the details of chosen event
